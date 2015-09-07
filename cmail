@@ -5,9 +5,9 @@
 # License : GPL v3.0
 # cmail v1.0
 #####################################################
-server="178.33.77.225:587" #server ip address whit port number, example : 10.0.0.1:587
-smtp_user="sshcloud" #smtp user
-smtp_pass="6ps0c6A3Ef" #smtp password
+server=" " #server ip address whit port number, example : 10.0.0.1:587
+smtp_user=" " #smtp user
+smtp_pass=" " #smtp password
 #####################################################
 
 function send {
