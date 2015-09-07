@@ -1,0 +1,43 @@
+#! /bin/bash
+# Programming and idea by : E2MA3N [Iman Homayouni]
+# Email : e2ma3n@Gmail.com
+# Website : http://OSLearn.ir
+# License : GPL v3.0
+# cmail v1.0
+#####################################################
+server="178.33.77.225:587" #server ip address whit port number, example : 10.0.0.1:587
+smtp_user="sshcloud" #smtp user
+smtp_pass="6ps0c6A3Ef" #smtp password
+#####################################################
+
+function send {
+mailx -v -r $from -s "$subject" -S smtp=$server -S smtp-use-starttls -S smtp-auth=login -S smtp-auth-user=$smtp_user -S smtp-auth-password="$smtp_pass" -S ssl-verify=ignore $to &> /dev/null
+}
+
+reset ; echo '[+] ------------------------------------------------------------------- [+]'
+echo -e "[+] Programming and idea by : \e[1mE2MA3N [Iman Homayouni]\e[0m"
+echo '[+] License : GPL v3.0'
+echo '[+] cmail v1.0'
+echo '[+]'
+echo -n "[+] From: " ; read from
+echo -n "[+] Subject: " ; read subject
+echo -n "[+] To: " ; read to
+echo -n "[+] Need editor or type just one line ? [e/t]: " ; read need
+if [ "$need" = "t" ];then
+	echo -n "[+] Your msg: " ; read msg
+	echo $msg | send
+	var=$?
+elif [ "$need" = "e" ];then
+	nano /tmp/cmail.msg
+	cat /tmp/cmail.msg | send
+	var=$?
+	rm -f /tmp/cmail.msg
+fi
+
+echo '[+]'
+if [ "$var" = "0" ];then
+	echo -e "\e[92m[+]\e[0m The email you send to \e[1m$to\e[0m was delivered\e[0m"
+else
+	echo -e "\e[91m[+]\e[0m The email you send to \e[1m$to\e[0m was not delivered\e[0m"
+fi
+echo '[+] ------------------------------------------------------------------- [+]'
